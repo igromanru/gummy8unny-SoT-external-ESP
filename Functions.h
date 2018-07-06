@@ -20,9 +20,9 @@ struct Color
 
 
 
-#define WORLD_OFFSET 0x50b3468
-#define OBJECTS_OFFSET 0x4ff6990
-#define NAME_OFFSET 0x4ff21d0
+#define WORLD_OFFSET 0x51b5578
+#define OBJECTS_OFFSET 0x50f3680
+#define NAME_OFFSET 0x50f7e40
 
 ULONG_PTR GNames;
 
