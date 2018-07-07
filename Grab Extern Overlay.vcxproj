@@ -132,7 +132,6 @@
     <ClCompile Include="cDrawings.cpp" />
     <ClCompile Include="cfg.cpp" />
     <ClCompile Include="cMain.cpp" />
-    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="ProcMem.cpp" />
   </ItemGroup>
   <ItemGroup>
