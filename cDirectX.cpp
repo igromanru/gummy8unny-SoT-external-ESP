@@ -70,16 +70,16 @@ int Render()
 
 			
 
-			ULONG_PTR ULevel = mem.Read<ULONG_PTR>(World + 0x30);
+			ULONG_PTR ULevel = mem.Read<ULONG_PTR>(World + Offsets::PersistentLevel);
 
-			int ActorCount = mem.Read<int>(ULevel + 0xA8);
+			int ActorCount = mem.Read<int>(ULevel + Offsets::ActorsTArrayCount);
 
 			std::vector<Vector3> new_XMarksTheSpot;
 
 		//	cfg.SaveCfg();
 		//	cfg.LoadCfg();
 
-			auto LocalNamePointer = mem.Read<ULONG_PTR>(LocalPlayeState + 0x480);
+			auto LocalNamePointer = mem.Read<ULONG_PTR>(LocalPlayeState + Offsets::PlayerName);
 			auto LocalName = mem.Read<textx>(LocalNamePointer);
 
 			std::wstring mename = LocalName.word;
@@ -93,7 +93,7 @@ int Render()
 
 			for (int i = 0; i < ActorCount; i++)
 			{
-				ULONG_PTR ActorList = mem.Read<ULONG_PTR>(ULevel + 0xA0);
+				ULONG_PTR ActorList = mem.Read<ULONG_PTR>(ULevel + Offsets::ActorsTArray);
 
 				ULONG_PTR Actor = mem.Read<ULONG_PTR>(ActorList + (i * 0x8));
 				if (!Actor)
@@ -133,11 +133,11 @@ int Render()
 				//if (name.find("BP_PlayerPirate_C") != std::string::npos || name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_BountyRewardSkull_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || (name.find("BP_MerchantCrate") != std::string::npos && name.find("Proxy") != std::string::npos) || name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos || name.find("Skeleton") != std::string::npos)
 				if (name.find("BP_PlayerPirate_C") != std::string::npos)
 				{
-					auto Actorhealthcomponet = mem.Read<ULONG_PTR>(Actor + 0x838);
+					auto Actorhealthcomponet = mem.Read<ULONG_PTR>(Actor + Offsets::HealthComponent);
 					float Actorhealth = mem.Read<float>(Actorhealthcomponet + 0xDC);
 					float Actormaxhealth = mem.Read<float>(Actorhealthcomponet + 0xF0);
-					auto ActorPlayerstate = mem.Read<ULONG_PTR>(Actor + 0x498);
-					auto ActorNamePointer = mem.Read<ULONG_PTR>(ActorPlayerstate + 0x480);
+					auto ActorPlayerstate = mem.Read<ULONG_PTR>(Actor + Offsets::PlayerState);
+					auto ActorNamePointer = mem.Read<ULONG_PTR>(ActorPlayerstate + Offsets::PlayerName);
 					auto ActorName = mem.Read<textx>(ActorNamePointer);
 
 					std::wstring test = ActorName.word;
