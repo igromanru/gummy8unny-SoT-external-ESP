@@ -1,6 +1,7 @@
 
 #include "Functions.h"
 #include "cfg.h"
+#include "Offsets.h"
 
 IDirect3D9Ex* p_Object = 0;
 IDirect3DDevice9Ex* p_Device = 0;
@@ -53,19 +54,19 @@ int Render()
 			
 			auto World = mem.Read<ULONG_PTR>(WorldAddress);
 			GNames = mem.Read<ULONG_PTR>(NamesAddress);
-			ULONG_PTR owninggameinstance = mem.Read<ULONG_PTR>(World + 0x1C0);
-			ULONG_PTR LocalPlayers = mem.Read<ULONG_PTR>(owninggameinstance + 0x38);
-			ULONG_PTR ULocalPlayer = mem.Read<ULONG_PTR>(LocalPlayers + 0x0);
-			ULONG_PTR PlayerController = mem.Read<ULONG_PTR>(ULocalPlayer + 0x30);
-			auto LocalPlayer = mem.Read<ULONG_PTR>(PlayerController + 0x480);
-			auto LocalPlayeState = mem.Read<ULONG_PTR>(PlayerController + 0x498);
-			auto HealthComponet = mem.Read<ULONG_PTR>(LocalPlayer + 0x838);
-			auto WieldedItemComponent = mem.Read<ULONG_PTR>(LocalPlayer + 0x810);
-			auto CurrentWieldedItem = mem.Read<ULONG_PTR>(WieldedItemComponent + 0x2F8);
-			auto pWieldedItem = mem.Read<ULONG_PTR>(CurrentWieldedItem + 0x568);
+			ULONG_PTR owninggameinstance = mem.Read<ULONG_PTR>(World + Offsets::OwningGameInstance);
+			ULONG_PTR LocalPlayers = mem.Read<ULONG_PTR>(owninggameinstance + Offsets::LocalPlayers);
+			ULONG_PTR ULocalPlayer = mem.Read<ULONG_PTR>(LocalPlayers);
+			ULONG_PTR PlayerController = mem.Read<ULONG_PTR>(ULocalPlayer + Offsets::PlayerController);
+			auto LocalPlayer = mem.Read<ULONG_PTR>(PlayerController + Offsets::Pawn);
+			auto LocalPlayeState = mem.Read<ULONG_PTR>(PlayerController + Offsets::PlayerState);
+			auto HealthComponet = mem.Read<ULONG_PTR>(LocalPlayer + Offsets::HealthComponent);
+			auto WieldedItemComponent = mem.Read<ULONG_PTR>(LocalPlayer + Offsets::WieldedItemComponent);
+			auto CurrentWieldedItem = mem.Read<ULONG_PTR>(WieldedItemComponent + Offsets::CurrentlyWieldedItem);
+			auto pWieldedItem = mem.Read<ULONG_PTR>(CurrentWieldedItem + Offsets::WieldableItemName);
 			std::wstring ItemWieleded = mem.Read<textx>(pWieldedItem).word;
-			auto CameraManager = mem.Read<ULONG_PTR>(PlayerController + 0x508);
-			auto RootComponet = mem.Read<ULONG_PTR>(LocalPlayer + 0x178);
+			auto CameraManager = mem.Read<ULONG_PTR>(PlayerController + Offsets::PlayerCameraManager);
+			auto RootComponent = mem.Read<ULONG_PTR>(LocalPlayer + Offsets::RootComponent);
 
 			
 
@@ -432,7 +433,7 @@ int Render()
 			
 				XMarksTheSpot = new_XMarksTheSpot;
 
-			myLocation = mem.Read<Vector3>(RootComponet + 0xFC);
+			myLocation = mem.Read<Vector3>(RootComponent + 0xFC);
 			myAngles = mem.Read<Vector3>(CameraManager + 0x50C);
 			Cameralocation = mem.Read<Vector3>(CameraManager + 0x500);
 			CameraFov = mem.Read<float>(CameraManager + 0x518);

@@ -11,6 +11,7 @@
 #include <codecvt>
 
 #include "FindPattern/FindPattern.h"
+#include "Offsets.h"
 
 #pragma comment(lib,"winmm.lib")
 

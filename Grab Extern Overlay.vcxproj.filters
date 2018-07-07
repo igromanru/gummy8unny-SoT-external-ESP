@@ -56,5 +56,8 @@
     <ClInclude Include="cfg.h">
       <Filter>CFG</Filter>
     </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
