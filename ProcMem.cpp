@@ -127,7 +127,7 @@ uintptr_t ProcMem::AOB_Scan(uintptr_t dwAddress, uintptr_t dwEnd, char *Bytes)
 
 uintptr_t ProcMem::Module(LPSTR moduleName)
 {
-	HANDLE hModule = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID); //Take A Module Snapshot Of The Process (Grab All Loaded Modules)
+	const auto hModule = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID); //Take A Module Snapshot Of The Process (Grab All Loaded Modules)
 	MODULEENTRY32 mEntry; //Declare Module Entry Structure
 	mEntry.dwSize = sizeof(mEntry); //Declare Structure Size And Populate It With Loaded Modules
 

@@ -1,0 +1,3 @@
+[submodule "FindPattern"]
+	path = FindPattern
+	url = git@github.com:igromanru/Cpp-external-FindPattern.git

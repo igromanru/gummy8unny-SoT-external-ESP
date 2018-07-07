@@ -18,7 +18,9 @@ public:
 	uintptr_t *base; //Stores Module Base Address
 	uintptr_t Proc_ID; //Varible to store Process ID
 	HANDLE hProcess;
-	uintptr_t dwPID, dwProtection, dwCaveAddress;
+	DWORD dwPID;
+	DWORD dwProtection;
+	DWORD dwCaveAddress;
 
 	BOOL bPOn, bIOn, bProt;
 

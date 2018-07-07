@@ -9,7 +9,11 @@
 #include <vector>
 #include <locale>
 #include <codecvt>
+
+#include "FindPattern/FindPattern.h"
+
 #pragma comment(lib,"winmm.lib")
+
 
 class CFG;
 
@@ -20,9 +24,9 @@ struct Color
 
 
 
-#define WORLD_OFFSET 0x51b5578
+/*#define WORLD_OFFSET 0x51b5578
 #define OBJECTS_OFFSET 0x50f3680
-#define NAME_OFFSET 0x50f7e40
+#define NAME_OFFSET 0x50f7e40*/
 
 ULONG_PTR GNames;
 
@@ -30,6 +34,9 @@ ProcMem mem;
 DWORD pid;
 uintptr_t BASE;
 bool FirstRun = true;
+uintptr_t WorldAddress;
+uintptr_t ObjectsAddress;
+uintptr_t NamesAddress;
 
 Vector3 myLocation, myAngles, Cameralocation;
 float CameraFov;
@@ -45,6 +52,21 @@ void ReadData()
 		BASE = mem.Module("SoTGame.exe");
 		FirstRun = false;
 
+		auto address = IgroWidgets::FindPatternExternal(mem.hProcess, reinterpret_cast<HMODULE>(BASE), 
+			reinterpret_cast<const unsigned char*>("\x48\x8B\x0D\x00\x00\x00\x00\x48\x8B\x01\xFF\x90\x00\x00\x00\x00\x48\x8B\xF8\x33\xD2\x48\x8D\x4E"),
+			"xxx????xxxxx????xxxxxxxx");
+		if (address > 0)
+		{			
+			WorldAddress = IgroWidgets::ReadRIPAddress(mem.hProcess, address, 3, 7);			
+		}
+		address = IgroWidgets::FindPatternExternal(mem.hProcess, reinterpret_cast<HMODULE>(BASE), 
+			reinterpret_cast<const unsigned char*>("\x48\x8B\x3D\x00\x00\x00\x00\x48\x85\xFF\x75\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xF8\x48\x89\x44"),
+			"xxx????xxxx?x????x????xxxxxx");
+		if (address > 0)
+		{
+			NamesAddress = IgroWidgets::ReadRIPAddress(mem.hProcess, address, 3, 7);
+		}
+		
 		//WaitForMultipleObjects(sizeof(rghThreads) / sizeof(HANDLE), rghThreads, TRU E, INFINITE);
 	}
 }
@@ -228,8 +250,7 @@ int GetTextWidth(const char *szText, ID3DXFont* pFont)
 	if (pFont)
 	{
 		// calculate required rect
-		pFont->DrawText(NULL, szText, strlen(szText), &rcRect, DT_CALCRECT,
-			D3DCOLOR_XRGB(0, 0, 0));
+		pFont->DrawText(nullptr, szText, strlen(szText), &rcRect, DT_CALCRECT, D3DCOLOR_XRGB(0, 0, 0));
 	}
 
 	// return width
@@ -322,13 +343,13 @@ bool find_Island_In_IslandDataEntries(std::string MapTexturePath, DWORD_PTR * Tr
 	DWORD_PTR list = NULL;
 	__int32 count = 0;
 	if (get_IslandDataEntries_list(IslandDataAsset_PTR, &list, &count)) {
-		for (int nIndex = 0; nIndex <= count; nIndex++) {
+		for (auto nIndex = 0; nIndex <= count; nIndex++) {
 			try {
-				DWORD_PTR cIsland = mem.Read<DWORD_PTR>(list + (nIndex * 0x8));
-				__int32 IslandName_ID = mem.Read<__int32>(cIsland + 0x28);
-				std::string IslandName = getNameFromID(IslandName_ID);
+				const auto cIsland = mem.Read<DWORD_PTR>(list + (nIndex * 0x8));
+				const auto IslandName_ID = mem.Read<__int32>(cIsland + 0x28);
+				const std::string IslandName = getNameFromID(IslandName_ID);
 				if (MapTexturePath.find(IslandName) != std::string::npos) {
-					DWORD_PTR FTreasureMapData_PTR = mem.Read<DWORD_PTR>(cIsland + 0x30);				// FTreasureMapData
+					const auto FTreasureMapData_PTR = mem.Read<DWORD_PTR>(cIsland + 0x30);				// FTreasureMapData
 					*TreasureLocations_PTR = mem.Read<DWORD_PTR>(FTreasureMapData_PTR + 0x10);			// FTreasureLocationData
 					*TreasureLocations_Count = mem.Read<__int32>(FTreasureMapData_PTR + 0x10 + 0x8);	// FTreasureLocationData_Size
 					return true;

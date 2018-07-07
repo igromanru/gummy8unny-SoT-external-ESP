@@ -50,9 +50,9 @@ int Render()
 	if(tWnd == GetForegroundWindow())
 	{
 		ReadData();
-		
-			auto World = mem.Read<ULONG_PTR>(BASE + WORLD_OFFSET);
-			GNames = mem.Read<ULONG_PTR>(BASE + NAME_OFFSET);
+			
+			auto World = mem.Read<ULONG_PTR>(WorldAddress);
+			GNames = mem.Read<ULONG_PTR>(NamesAddress);
 			ULONG_PTR owninggameinstance = mem.Read<ULONG_PTR>(World + 0x1C0);
 			ULONG_PTR LocalPlayers = mem.Read<ULONG_PTR>(owninggameinstance + 0x38);
 			ULONG_PTR ULocalPlayer = mem.Read<ULONG_PTR>(LocalPlayers + 0x0);
