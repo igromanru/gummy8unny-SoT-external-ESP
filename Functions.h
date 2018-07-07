@@ -46,10 +46,7 @@ void ReadData()
 		FirstRun = false;
 
 		//WaitForMultipleObjects(sizeof(rghThreads) / sizeof(HANDLE), rghThreads, TRU E, INFINITE);
-
-
 	}
-
 }
 
 class text

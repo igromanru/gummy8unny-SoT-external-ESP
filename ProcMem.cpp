@@ -13,9 +13,8 @@ ProcMem::~ProcMem() {
 }
 
 
-int ProcMem::chSizeOfArray(char *chArray) {
-
-
+int ProcMem::chSizeOfArray(char *chArray) 
+{
 	for (int iLength = 1; iLength < MAX_PATH; iLength++)
 		if (chArray[iLength] == '*')
 			return iLength;
@@ -24,10 +23,8 @@ int ProcMem::chSizeOfArray(char *chArray) {
 	return 0;
 }
 
-
-int ProcMem::iSizeOfArray(int *iArray) {
-
-
+int ProcMem::iSizeOfArray(int *iArray) 
+{
 	for (int iLength = 1; iLength < MAX_PATH; iLength++)
 		if (iArray[iLength] == '*')
 			return iLength;
@@ -36,9 +33,8 @@ int ProcMem::iSizeOfArray(int *iArray) {
 	return 0;
 }
 
-
-bool ProcMem::iFind(int *iAry, int iVal) {
-
+bool ProcMem::iFind(int *iAry, int iVal) 
+{
 	for (int i = 0; i < 64; i++)
 		if (iVal == iAry[i] && iVal != 0)
 			return true;
@@ -53,39 +49,32 @@ bool ProcMem::iFind(int *iAry, int iVal) {
 #pragma region Memory Functions
 
 
-void ProcMem::Process(char* ProcessName) {
-
-
+void ProcMem::Process(char* ProcessName) 
+{
 	HANDLE hPID = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
 	PROCESSENTRY32 ProcEntry;
 	ProcEntry.dwSize = sizeof(ProcEntry);
 
-
 	do
 		if (!strcmp(ProcEntry.szExeFile, ProcessName))
 		{
-
-
 			dwPID = ProcEntry.th32ProcessID;
 			CloseHandle(hPID);
-
 
 			hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPID);
 			return;
 		}
 	while (Process32Next(hPID, &ProcEntry));
 
-	cout << "\nCould not find the process csgo.exe...\n\n";
+	cout << "\nCould not find the process " << ProcessName << "\n\n" ;
 	system("pause");
 	exit(0);
 }
 
 
-void ProcMem::Patch(uintptr_t dwAddress, char *Patch_Bts, char *Default_Bts) {
-
-
+void ProcMem::Patch(uintptr_t dwAddress, char *Patch_Bts, char *Default_Bts) 
+{
 	int iSize = chSizeOfArray(Default_Bts);
-
 
 	if (!bPOn)
 		for (int i = 0; i < iSize; i++)
@@ -97,13 +86,11 @@ void ProcMem::Patch(uintptr_t dwAddress, char *Patch_Bts, char *Default_Bts) {
 	bPOn = !bPOn;
 }
 
-uintptr_t ProcMem::AOB_Scan(uintptr_t dwAddress, uintptr_t dwEnd, char *Bytes) {
-
-
+uintptr_t ProcMem::AOB_Scan(uintptr_t dwAddress, uintptr_t dwEnd, char *Bytes) 
+{
 	int iBytesToRead = 0, iTmp = 0;
 	int length = chSizeOfArray(Bytes);
 	bool bTmp = false;
-
 
 	if (Bytes[0] == '?')
 	{
@@ -114,7 +101,6 @@ uintptr_t ProcMem::AOB_Scan(uintptr_t dwAddress, uintptr_t dwEnd, char *Bytes) {
 				break;
 			}
 	}
-
 
 	for (; dwAddress < dwEnd; dwAddress++)
 	{
@@ -141,23 +127,22 @@ uintptr_t ProcMem::AOB_Scan(uintptr_t dwAddress, uintptr_t dwEnd, char *Bytes) {
 
 uintptr_t ProcMem::Module(LPSTR moduleName)
 {
-	//Variables
 	HANDLE hModule = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID); //Take A Module Snapshot Of The Process (Grab All Loaded Modules)
 	MODULEENTRY32 mEntry; //Declare Module Entry Structure
 	mEntry.dwSize = sizeof(mEntry); //Declare Structure Size And Populate It With Loaded Modules
 
-									//Scan For Module By Name
+	//Scan For Module By Name
 	do
 		if (!strcmp(mEntry.szModule, moduleName))
 		{
 			CloseHandle(hModule);
-			return (uintptr_t)mEntry.modBaseAddr;
+			return reinterpret_cast<uintptr_t>(mEntry.modBaseAddr);
 		}
 	while (Module32Next(hModule, &mEntry));
 
 	CloseHandle(hModule);
 
-	std::cout << "\nCouldn't find " << moduleName << std::endl; //stop using namespace std. Bad as name conflicts can occur. Not in this case, but don't learn it the wrong way.
+	std::cout << "\nCouldn't find " << moduleName << std::endl;
 	return 0;
 }
 #pragma endregion

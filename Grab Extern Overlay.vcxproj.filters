@@ -36,6 +36,9 @@
     <ClCompile Include="Functions.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="FindPattern\FindPattern.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hMain.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="cfg.h">
       <Filter>CFG</Filter>
+    </ClInclude>
+    <ClInclude Include="FindPattern\FindPattern.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
