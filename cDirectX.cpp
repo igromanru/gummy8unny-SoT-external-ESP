@@ -99,16 +99,14 @@ int Render()
 				if (!Actor)
 					continue;
 
+				int ActorID = mem.Read<int>(Actor + Offsets::Id);
+				auto ActorRootComponet = mem.Read<ULONG_PTR>(Actor + Offsets::RootComponent);
+				auto Actorrelativelocation = mem.Read<Vector3>(ActorRootComponet + Offsets::RelativeLocation);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
+				auto ActorYaw = mem.Read<float>(ActorRootComponet + Offsets::RelativeRotationYaw);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
 
-
-				int ActorID = mem.Read<int>(Actor + 0x18);
-				auto ActorRootComponet = mem.Read<ULONG_PTR>(Actor + 0x178);
-				auto Actorrelativelocation = mem.Read<Vector3>(ActorRootComponet + 0xFC);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
-				auto ActorYaw = mem.Read<float>(ActorRootComponet + 0x200);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
-
-				auto ActorWieldedItemComponent = mem.Read<ULONG_PTR>(Actor + 0x810);
-				auto ActorCurrentWieldedItem = mem.Read<ULONG_PTR>(ActorWieldedItemComponent + 0x2F8);
-				auto ActorpWieldedItem = mem.Read<ULONG_PTR>(ActorCurrentWieldedItem + 0x568);
+				auto ActorWieldedItemComponent = mem.Read<ULONG_PTR>(Actor + Offsets::WieldedItemComponent);
+				auto ActorCurrentWieldedItem = mem.Read<ULONG_PTR>(ActorWieldedItemComponent + Offsets::CurrentlyWieldedItem);
+				auto ActorpWieldedItem = mem.Read<ULONG_PTR>(ActorCurrentWieldedItem + Offsets::WieldableItemName);
 				std::wstring ActorItemWieleded = mem.Read<textx>(ActorpWieldedItem).word;
 
 				using convert_type = std::codecvt_utf8<wchar_t>;
@@ -134,8 +132,8 @@ int Render()
 				if (name.find("BP_PlayerPirate_C") != std::string::npos)
 				{
 					auto Actorhealthcomponet = mem.Read<ULONG_PTR>(Actor + Offsets::HealthComponent);
-					float Actorhealth = mem.Read<float>(Actorhealthcomponet + 0xDC);
-					float Actormaxhealth = mem.Read<float>(Actorhealthcomponet + 0xF0);
+					float Actorhealth = mem.Read<float>(Actorhealthcomponet + Offsets::CurrentHealth);
+					float Actormaxhealth = mem.Read<float>(Actorhealthcomponet + Offsets::MaxHealth);
 					auto ActorPlayerstate = mem.Read<ULONG_PTR>(Actor + Offsets::PlayerState);
 					auto ActorNamePointer = mem.Read<ULONG_PTR>(ActorPlayerstate + Offsets::PlayerName);
 					auto ActorName = mem.Read<textx>(ActorNamePointer);
@@ -433,12 +431,12 @@ int Render()
 			
 				XMarksTheSpot = new_XMarksTheSpot;
 
-			myLocation = mem.Read<Vector3>(RootComponent + 0xFC);
-			myAngles = mem.Read<Vector3>(CameraManager + 0x50C);
-			Cameralocation = mem.Read<Vector3>(CameraManager + 0x500);
-			CameraFov = mem.Read<float>(CameraManager + 0x518);
-			float myhealth  = mem.Read<float>(HealthComponet + 0xDC);
-			float maxhealth = mem.Read<float>(HealthComponet + 0xF0);
+			myLocation = mem.Read<Vector3>(RootComponent + Offsets::RelativeLocation);
+			myAngles = mem.Read<Vector3>(CameraManager +  Offsets::RelativeRotation);
+			Cameralocation = mem.Read<Vector3>(CameraManager +  Offsets::CameraCache);
+			CameraFov = mem.Read<float>(CameraManager + Offsets::CameraCachePOV);
+			float myhealth  = mem.Read<float>(HealthComponet + Offsets::CurrentHealth);
+			float maxhealth = mem.Read<float>(HealthComponet + Offsets::MaxHealth);
 			Sleep(2);
 		
 
