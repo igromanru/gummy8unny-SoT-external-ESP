@@ -59,5 +59,8 @@
     <ClInclude Include="Offsets.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="FindPattern\FindPattern.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

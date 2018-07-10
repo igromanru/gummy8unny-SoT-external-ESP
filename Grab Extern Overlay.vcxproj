@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cfg.h" />
+    <ClInclude Include="FindPattern\FindPattern.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="hDirectX.h" />
     <ClInclude Include="hDrawings.h" />

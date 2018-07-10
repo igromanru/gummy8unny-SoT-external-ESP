@@ -6,7 +6,7 @@ public:
 	// UWorld
 	static const int PersistentLevel = 0x30; // ULevel
 	static const int ActorsTArray = 0xA0; // Uknown offsets
-	static const int ActorsTArrayCount = ActorsTArray + 8;
+	static const int ActorsTArrayCount = ActorsTArray + 0x8;
 	static const int OwningGameInstance = 0x1C0;
 
 	// UGameInstance
@@ -55,5 +55,25 @@ public:
 	// APlayerCameraManager
 	static const int CameraCache = 0x500;
 	static const int CameraCachePOV = CameraCache + 0x10;
+
+	// AIslandService
+	static const int IslandDataAsset = 0x4E8;
+
+	// UIslandDataAsset
+	static const int IslandDataEntries = 0x40;
+	static const int IslandDataEntriesCount  = IslandDataEntries + 0x8;
+
+	// UIslandDataAssetEntry
+	static const int IslandName = 0x28;
+	static const int TreasureMaps = 0x30;
+
+	// FTreasureMapData
+	static const int TreasureLocations = 0x10;
+	static const int TreasureLocationsCount = TreasureLocations + 0x8;
+
+	// AXMarksTheSpotMap
+	static const int MapTexturePath = 0x888;
+	static const int Marks = 0x8C8;
+	static const int MarksCount = Marks + 0x8;
 };
 

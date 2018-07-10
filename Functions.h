@@ -1,17 +1,17 @@
 #pragma once
 
-#include "hDirectX.h"
 #include <thread>
 #include <conio.h>
-#include "ProcMem.h"
-#include <stdlib.h> 
-#include "Vector.h"
 #include <vector>
 #include <locale>
 #include <codecvt>
 
-#include "FindPattern/FindPattern.h"
+#include "ProcMem.h"
+#include "Vector.h"
+#include "hDirectX.h"
 #include "Offsets.h"
+#include "FindPattern/FindPattern.h"
+
 
 #pragma comment(lib,"winmm.lib")
 
@@ -209,8 +209,8 @@ bool WorldToScreen(Vector3 origin, Vector2 * out) {
 	float ScreenCenterX = Width / 2.0f;
 	float ScreenCenterY = Height / 2.0f;
 
-	out->x = ScreenCenterX + vTransformed.x * (ScreenCenterX / tanf(FovAngle * (float)PI / 360.f)) / vTransformed.z;
-	out->y = ScreenCenterY - vTransformed.y * (ScreenCenterX / tanf(FovAngle * (float)PI / 360.f)) / vTransformed.z;
+	out->x = ScreenCenterX + vTransformed.x * (ScreenCenterX / tanf(FovAngle * static_cast<float>(PI) / 360.f)) / vTransformed.z;
+	out->y = ScreenCenterY - vTransformed.y * (ScreenCenterX / tanf(FovAngle * static_cast<float>(PI) / 360.f)) / vTransformed.z;
 
 
 	return true;
@@ -231,9 +231,9 @@ Vector3 CalcAngle(Vector3 src, Vector3 dst)
 Vector2 RotatePoint(Vector2 pointToRotate, Vector2 centerPoint, float angle, bool angleInRadians = false)
 {
 	if (!angleInRadians)
-		angle = (float)(angle * (PI / 180.f));
-	float cosTheta = (float)cos(angle);
-	float sinTheta = (float)sin(angle);
+		angle = static_cast<float>(angle * (PI / 180.f));
+	float cosTheta = static_cast<float>(cos(angle));
+	float sinTheta = static_cast<float>(sin(angle));
 	Vector2 returnVec = Vector2(cosTheta * (pointToRotate.x - centerPoint.x) - sinTheta * (pointToRotate.y - centerPoint.y), sinTheta * (pointToRotate.x - centerPoint.x) + cosTheta * (pointToRotate.y - centerPoint.y)
 	);
 	returnVec += centerPoint;
@@ -329,8 +329,8 @@ struct FTreasureLocationData {
 
 bool get_IslandDataEntries_list(DWORD_PTR IslandDataAsset_PTR, DWORD_PTR * list, __int32 * count) {
 	try {
-		*list = mem.Read<DWORD_PTR>(IslandDataAsset_PTR + 0x40);
-		*count = mem.Read<__int32>(IslandDataAsset_PTR + 0x40 + 0x8);
+		*list = mem.Read<DWORD_PTR>(IslandDataAsset_PTR + Offsets::IslandDataEntries);
+		*count = mem.Read<__int32>(IslandDataAsset_PTR + Offsets::IslandDataEntriesCount);
 		return true;
 	}
 	catch (int e) {
@@ -347,12 +347,12 @@ bool find_Island_In_IslandDataEntries(std::string MapTexturePath, DWORD_PTR * Tr
 		for (auto nIndex = 0; nIndex <= count; nIndex++) {
 			try {
 				const auto cIsland = mem.Read<DWORD_PTR>(list + (nIndex * 0x8));
-				const auto IslandName_ID = mem.Read<__int32>(cIsland + 0x28);
+				const auto IslandName_ID = mem.Read<__int32>(cIsland + Offsets::IslandName);
 				const std::string IslandName = getNameFromID(IslandName_ID);
 				if (MapTexturePath.find(IslandName) != std::string::npos) {
-					const auto FTreasureMapData_PTR = mem.Read<DWORD_PTR>(cIsland + 0x30);				// FTreasureMapData
-					*TreasureLocations_PTR = mem.Read<DWORD_PTR>(FTreasureMapData_PTR + 0x10);			// FTreasureLocationData
-					*TreasureLocations_Count = mem.Read<__int32>(FTreasureMapData_PTR + 0x10 + 0x8);	// FTreasureLocationData_Size
+					const auto FTreasureMapData_PTR = mem.Read<DWORD_PTR>(cIsland + Offsets::TreasureMaps);					// FTreasureMapData
+					*TreasureLocations_PTR = mem.Read<DWORD_PTR>(FTreasureMapData_PTR + Offsets::TreasureLocations);		// FTreasureLocationData
+					*TreasureLocations_Count = mem.Read<__int32>(FTreasureMapData_PTR + Offsets::TreasureLocationsCount);	// FTreasureLocationData_Size
 					return true;
 				}
 			}
@@ -376,9 +376,9 @@ std::vector<Vector3> XMarksTheSpot;
 
 bool get_TreasureMap(DWORD_PTR _PTR, std::string * MapTexturePath, std::vector<Vector2> * Marks) {
 	try {
-		DWORD_PTR Name_PTR = mem.Read<DWORD_PTR>(_PTR + 0x860);
-		DWORD_PTR Marks_PTR = mem.Read<DWORD_PTR>(_PTR + 0x8A0);
-		__int32 Marks_Cout = mem.Read<__int32>(_PTR + 0x8A0 + 0x8);
+		DWORD_PTR Name_PTR = mem.Read<DWORD_PTR>(_PTR + Offsets::MapTexturePath);
+		DWORD_PTR Marks_PTR = mem.Read<DWORD_PTR>(_PTR + Offsets::Marks);
+		__int32 Marks_Cout = mem.Read<__int32>(_PTR + Offsets::MarksCount);
 
 		std::wstring test = mem.Read<textx>(Name_PTR).word;
 
