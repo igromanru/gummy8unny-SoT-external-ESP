@@ -4,79 +4,79 @@ class Offsets
 {
 public:
 	// APlayerController
-	static const int PlayerCameraManager = 0x518;
+	static constexpr int PlayerCameraManager = 0x518;
 		
 	// AAthenaCharacter
-	static const int WieldedItemComponent = 0x820;
-	static const int HealthComponent = 0x848;
+	static constexpr int WieldedItemComponent = 0x820;
+	static constexpr int HealthComponent = 0x848;
 			
 	// UWieldedItemComponent
-	static const int CurrentlyWieldedItem = 0x2B0;
+	static constexpr int CurrentlyWieldedItem = 0x2B0;
 
 	// AWieldableItem
-	static const int WieldableItemName = 0x580; // ItemName property
+	static constexpr int WieldableItemName = 0x580; // ItemName property
 		
 	// APlayerCameraManager
-	static const int CameraCache = 0x500;
-	static const int CameraCachePOV = CameraCache + 0x10;
+	static constexpr int CameraCache = 0x500;
+	static constexpr int CameraCachePOV = CameraCache + 0x10;
 	
 	// UIslandDataAsset
-	static const int IslandDataEntries = 0x40;
-	static const int IslandDataEntriesCount  = IslandDataEntries + 0x8;
+	static constexpr int IslandDataEntries = 0x40;
+	static constexpr int IslandDataEntriesCount  = IslandDataEntries + 0x8;
 
 	// UIslandDataAssetEntry
-	static const int IslandName = 0x28;
-	static const int TreasureMaps = 0x30;
+	static constexpr int IslandName = 0x28;
+	static constexpr int TreasureMaps = 0x30;
 
 	// AXMarksTheSpotMap
-	static const int MapTexturePath = 0x888;
-	static const int Marks = 0x8C8;
-	static const int MarksCount = Marks + 0x8;
+	static constexpr int MapTexturePath = 0x888;
+	static constexpr int Marks = 0x8C8;
+	static constexpr int MarksCount = Marks + 0x8;
 
 #pragma region Almsonst never changing offsets
 	// UObject
-	static const int Id = 0x18;
+	static constexpr int Id = 0x18;
 
 	// UWorld
-	static const int PersistentLevel = 0x30; // ULevel
-	static const int ActorsTArray = 0xA0; // Uknown offsets
-	static const int ActorsTArrayCount = ActorsTArray + 0x8;
-	static const int OwningGameInstance = 0x1C0;
+	static constexpr int PersistentLevel = 0x30; // ULevel
+	static constexpr int ActorsTArray = 0xA0; // Uknown offsets
+	static constexpr int ActorsTArrayCount = ActorsTArray + 0x8;
+	static constexpr int OwningGameInstance = 0x1C0;
 
 	// UGameInstance
-	static const int LocalPlayers = 0x38;
+	static constexpr int LocalPlayers = 0x38;
 
 	// UPlayer
-	static const int PlayerController = 0x30;
+	static constexpr int PlayerController = 0x30;
 
 	// AActor		
-	static const int RootComponent = 0x178;
+	static constexpr int RootComponent = 0x178;
 
 	// APawn
-	static const int PlayerState = 0x4A8;
+	static constexpr int PlayerState = 0x4A8;
 
 	// AController
-	static const int Pawn = 0x490; // LocalPlayer
+	static constexpr int Pawn = 0x490; // LocalPlayer
 
 	// APlayerState
-	static const int PlayerId = 0x4B0;	
-	static const int PlayerName = 0x490;
+	static constexpr int PlayerId = 0x4B0;	
+	static constexpr int PlayerName = 0x490;
 
 	// UHealthComponent
-	static const int CurrentHealth = 0xDC;
-	static const int MaxHealth = 0xD0;
+	static constexpr int CurrentHealth = 0xDC;
+	static constexpr int MaxHealth = 0xD0;
 
 	// USceneComponent
-	static const int RelativeLocation = 0x1B0;
-	static const int RelativeRotation = RelativeLocation + 0xC;
-	static const int RelativeRotationYaw = RelativeRotation + 0x4;
+	static constexpr int RelativeLocation = 0x1B0;
+	static constexpr int RelativeRotation = RelativeLocation + 0xC;
+	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
 	// AIslandService
-	static const int IslandDataAsset = 0x4E8;
+	static constexpr int IslandDataAsset = 0x4E8;
 
 	// FTreasureMapData
-	static const int TreasureLocations = 0x10;
-	static const int TreasureLocationsCount = TreasureLocations + 0x8;
+	static constexpr int TreasureLocations = 0x10;
+	static constexpr int TreasureLocationsCount = TreasureLocations + 0x8;
 #pragma endregion
 };
 
