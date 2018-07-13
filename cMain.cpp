@@ -40,16 +40,16 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hSecInstance, LPSTR nCmdLine, INT nCmdShow)
 {
-	CreateThread(0, 0, (LPTHREAD_START_ROUTINE)SetWindowToTarget, 0, 0, 0);
+	CreateThread(0, 0, reinterpret_cast<LPTHREAD_START_ROUTINE>(SetWindowToTarget), nullptr, 0, nullptr);
 
 	WNDCLASSEX wClass;
 	wClass.cbClsExtra = NULL;
 	wClass.cbSize = sizeof(WNDCLASSEX);
 	wClass.cbWndExtra = NULL;
-	wClass.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
-	wClass.hCursor = LoadCursor(0, IDC_ARROW);
-	wClass.hIcon = LoadIcon(0, IDI_APPLICATION);
-	wClass.hIconSm = LoadIcon(0, IDI_APPLICATION);
+	wClass.hbrBackground = static_cast<HBRUSH>(CreateSolidBrush(RGB(0, 0, 0)));
+	wClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wClass.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+	wClass.hIconSm = LoadIcon(nullptr, IDI_APPLICATION);
 	wClass.hInstance = hInstance;
 	wClass.lpfnWndProc = WinProc;
 	wClass.lpszClassName = lWindowName;
@@ -59,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hSecInstance, LPSTR nCmdLine, 
 	if(!RegisterClassEx(&wClass))
 		exit(1);
 
-	tWnd = FindWindow(0, tWindowName);
+	tWnd = FindWindow(nullptr, tWindowName);
 	if (tWnd)
 	{
 		GetWindowRect(tWnd, &tSize);

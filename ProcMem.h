@@ -18,14 +18,13 @@ public:
 	uintptr_t *base; //Stores Module Base Address
 	uintptr_t Proc_ID; //Varible to store Process ID
 	HANDLE hProcess;
-	uintptr_t dwPID, dwProtection, dwCaveAddress;
-
+	DWORD dwPID;
+	DWORD dwProtection;
+	DWORD dwCaveAddress;
 
 	BOOL bPOn, bIOn, bProt;
 
 public:
-
-
 	ProcMem();
 	~ProcMem();
 	int chSizeOfArray(char *chArray);
@@ -34,10 +33,6 @@ public:
 
 #pragma region TEMPLATE MEMORY FUNCTIONS
 
-
-
-
-
 	template <class cData>
 	cData Read(uintptr_t dwAddress)
 	{
@@ -45,7 +40,6 @@ public:
 		ReadProcessMemory(hProcess, (LPVOID)dwAddress, &cRead, sizeof(cData), NULL);
 		return cRead;
 	}
-
 
 	template <class cData>
 	cData Read(uintptr_t dwAddress, char *Offset, BOOL Type)
@@ -64,20 +58,17 @@ public:
 			return Read<cData>(dwAddress + Offset[iSize]);
 	}
 
-
 	template <class cData>
 	void Read(uintptr_t dwAddress, cData Value)
 	{
 		ReadProcessMemory(hProcess, (LPVOID)dwAddress, &Value, sizeof(cData), NULL);
 	}
 
-
 	template <class cData>
 	void Read(uintptr_t dwAddress, char *Offset, cData Value)
 	{
 		Read<cData>(Read<cData>(dwAddress, Offset, false), Value);
 	}
-
 
 	virtual void Process(char* ProcessName);
 	virtual void Patch(uintptr_t dwAddress, char *chPatch_Bts, char *chDefault_Bts);

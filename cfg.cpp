@@ -52,7 +52,6 @@ CFG::~CFG()
 }
 
 
-
 void CFG::LoadCfg()
 {
 	static TCHAR path[MAX_PATH];
