@@ -365,8 +365,16 @@ int Render()
 					ActorArray.push_back(info);
 				}
 
-
-
+				else if (name.find("BP_SmallShipNetProxy") != std::string::npos || name.find("BP_LargeShipNetProxy") != std::string::npos)
+				{
+					info.id = ActorID;
+					info.name = "Ship";
+					info.type = ship;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 300);
+					info.yaw = ActorYaw;
+					ActorArray.push_back(info);
+				}
 				else if (name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos)
 				{
 					info.id = ActorID;
