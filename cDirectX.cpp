@@ -432,9 +432,9 @@ int Render()
 				XMarksTheSpot = new_XMarksTheSpot;
 
 			myLocation = mem.Read<Vector3>(RootComponent + Offsets::RelativeLocation);
-			myAngles = mem.Read<Vector3>(CameraManager +  Offsets::RelativeRotation);
-			Cameralocation = mem.Read<Vector3>(CameraManager +  Offsets::CameraCache);
-			CameraFov = mem.Read<float>(CameraManager + Offsets::CameraCachePOV);
+			myAngles = mem.Read<Vector3>(CameraManager + Offsets::CameraRotation);
+			Cameralocation = mem.Read<Vector3>(CameraManager + Offsets::CameraLocation);
+			CameraFov = mem.Read<float>(CameraManager + Offsets::CameraFOV);
 			auto myhealth  = mem.Read<float>(HealthComponet + Offsets::CurrentHealth);
 			auto maxhealth = mem.Read<float>(HealthComponet + Offsets::MaxHealth);
 			Sleep(2);

@@ -5,6 +5,7 @@ class Offsets
 public:
 	// APlayerController
 	static constexpr int PlayerCameraManager = 0x518;
+
 		
 	// AAthenaCharacter
 	static constexpr int WieldedItemComponent = 0x820;
@@ -19,6 +20,9 @@ public:
 	// APlayerCameraManager
 	static constexpr int CameraCache = 0x500;
 	static constexpr int CameraCachePOV = CameraCache + 0x10;
+	static constexpr int CameraLocation = CameraCachePOV + 0x0;
+	static constexpr int CameraRotation = CameraCachePOV + 0xC;
+	static constexpr int CameraFOV = CameraCachePOV + 0x18;
 	
 	// UIslandDataAsset
 	static constexpr int IslandDataEntries = 0x40;
