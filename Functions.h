@@ -205,7 +205,7 @@ bool WorldToScreen(Vector3 origin, Vector2 * out) {
 	if (vTransformed.z < 1.f)
 		vTransformed.z = 1.f;
 
-	float FovAngle = CameraFov + 22;
+	float FovAngle = CameraFov; // + 22; for widescreen?
 	float ScreenCenterX = Width / 2.0f;
 	float ScreenCenterY = Height / 2.0f;
 
