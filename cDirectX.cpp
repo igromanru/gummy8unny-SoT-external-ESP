@@ -389,6 +389,27 @@ int Render()
 				{
 					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
 				}
+				else if (name.find("BP_SunkenCurseArtefact_") != std::string::npos)
+				{
+					info.id = ActorID;
+					if (name.find("Ruby") != std::string::npos)
+					{
+						info.name = "Ruby UnderWater Statue";
+					}
+					else if (name.find("Emerald") != std::string::npos)
+					{
+						info.name = "Emerald UnderWater Statue";
+					}
+					else if (name.find("Sapphire") != std::string::npos)
+					{
+						info.name = "Sapphire UnderWater Statue";
+					}
+					info.type = animalcrate;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+					ActorArray.push_back(info);
+
+				}
 
 				if (IslandDataAsset_PTR != NULL)
 				{
