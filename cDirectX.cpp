@@ -211,7 +211,7 @@ int Render()
 					if (name.find("PirateLegend") != std::string::npos)
 					{
 						info.id = ActorID;
-						info.name = "Pirate Legend Chest";
+						info.name = "Chest of Legends";
 						info.rareity = Fort;
 					}
 					if (name.find("StrongholdKey") != std::string::npos)
@@ -321,16 +321,97 @@ int Render()
 					//info.namesize = GetTextWidth(info.name.c_str(), pFontSmall);
 					ActorArray.push_back(info);
 				}
+//
+// Skeleton Fort - Skull Cloud
+//
+				else if (name.find("BP_SkellyFort") != std::string::npos)
+				{
+					info.type = fort;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("SkullCloud") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Skeleton Fort";
+						info.rareity = Legendary;
+					}
+
+					ActorArray.push_back(info);
+				}
+//
+// Treasure Artifacts (Shinys)
+//
+				else if (name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
+				{
+
+					info.type = artifact;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("box") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Box";
+						info.rareity = Common;
+					}
+					if (name.find("goblet") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Goblet";
+						info.rareity = Rare;
+					}
+					if (name.find("impressive") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Impressive";
+						info.rareity = Legendary;
+					}
+					if (name.find("vase") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Vase";
+						info.rareity = Mythical;
+					}
+					if (name.find("base") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "??Shiny Base??";
+						info.rareity = Rare;
+					}
+
+					ActorArray.push_back(info);
+				}
+				//
+				// SKELETONS
+				//(updated to check for metal/shadow/plant forms)
 				else if (name.find("Skeleton") != std::string::npos)
 				{
 					info.id = ActorID;
-					info.name = "Skeleton";
+					//Check if Metal/Shadow/Plant Skeletons
+					if (name.find("MetalForm") != std::string::npos)
+					{
+						info.name = "{M} Skeleton";
+						info.rareity = Legendary;
+					}
+					else if (name.find("ShadowForm") != std::string::npos)
+					{
+						info.name = "~S~ Skeleton";
+						info.rareity = Mythical;
+					}
+					else if (name.find("PlantForm") != std::string::npos)
+					{
+						info.name = "<P> Skeleton";
+						info.rareity = Rare;
+					}
+					else
+					{
+						info.name = "Skeleton";
+					}
 					info.type = skeleton;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+
 					ActorArray.push_back(info);
 				}
-
 				else if (name.find("BP_Chicken_") != std::string::npos)
 				{
 
@@ -364,7 +445,74 @@ int Render()
 
 					ActorArray.push_back(info);
 				}
+				// Pigs
+				else if (name.find("BP_Pig_") != std::string::npos)
+				{
 
+					info.type = pig;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Pink Pig";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Pig";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Pig";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Pig";
+						info.rareity = Mythical;
+					}
+
+					ActorArray.push_back(info);
+				}
+				// Snakes
+				else if (name.find("BP_Snake_") != std::string::npos)
+				{
+
+					info.type = snake;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Common Snake";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Snake";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Snake";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Snake";
+						info.rareity = Mythical;
+					}
+
+					ActorArray.push_back(info);
+				}
 				else if (name.find("BP_SmallShipNetProxy") != std::string::npos || name.find("BP_LargeShipNetProxy") != std::string::npos)
 				{
 					info.id = ActorID;
