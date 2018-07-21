@@ -4,7 +4,7 @@ class Offsets
 {
 public:
 	// :APlayerController:PlayerCameraManager:SoT_Engine_classes.hpp
-	static constexpr int PlayerCameraManager = 0x518;
+	static constexpr int PlayerCameraManager = 0x0518;
 			
 	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
 	static constexpr int WieldedItemComponent = 0x820;
@@ -12,13 +12,13 @@ public:
 	static constexpr int HealthComponent = 0x848;
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
-	static constexpr int CurrentlyWieldedItem = 0x2B0;
+	static constexpr int CurrentlyWieldedItem = 0x02A8;
 
 	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
 	static constexpr int WieldableItemName = 0x580; // ItemName property
 		
-	// :APlayerCameraManager:CameraCache:SoT_Athena_classes.hpp
-	static constexpr int CameraCache = 0x500;
+	// :APlayerCameraManager:CameraCache:SoT_Engine_classes.hpp
+	static constexpr int CameraCache = 0x0500;
 	// :FCameraCacheEntry:POV:SoT_Engine_structs.hpp
 	static constexpr int CameraCachePOV = CameraCache + 0x10;
 	static constexpr int CameraLocation = CameraCachePOV + 0x0;
@@ -30,7 +30,7 @@ public:
 	static constexpr int IslandDataEntriesCount  = IslandDataEntries + 0x8;
 
 	// :UIslandDataAssetEntry:IslandName:SoT_Athena_classes.hpp
-	static constexpr int IslandName = 0x28;
+	static constexpr int IslandName = 0x0028;
 	// :UIslandDataAssetEntry:TreasureMaps:SoT_Athena_classes.hpp
 	static constexpr int TreasureMaps = 0x30;
 
@@ -74,7 +74,7 @@ public:
 	static constexpr int MaxHealth = 0xD0;
 
 	// :USceneComponent:RelativeLocation:SoT_Engine_classes.hpp
-	static constexpr int RelativeLocation = 0x1B0;
+	static constexpr int RelativeLocation = 0x01B0;
 	static constexpr int RelativeRotation = RelativeLocation + 0xC;
 	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
