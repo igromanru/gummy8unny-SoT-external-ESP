@@ -3,37 +3,40 @@
 class Offsets
 {
 public:
-	// APlayerController
+	// :APlayerController:PlayerCameraManager:SoT_Engine_classes.hpp
 	static constexpr int PlayerCameraManager = 0x518;
-
-		
-	// AAthenaCharacter
-	static constexpr int WieldedItemComponent = 0x820;
-	static constexpr int HealthComponent = 0x848;
 			
-	// UWieldedItemComponent
+	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
+	static constexpr int WieldedItemComponent = 0x820;
+	// :AAthenaCharacter:HealthComponent:SoT_Athena_classes.hpp
+	static constexpr int HealthComponent = 0x848;
+		
+	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
 	static constexpr int CurrentlyWieldedItem = 0x2B0;
 
-	// AWieldableItem
+	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
 	static constexpr int WieldableItemName = 0x580; // ItemName property
 		
-	// APlayerCameraManager
+	// :APlayerCameraManager:CameraCache:SoT_Athena_classes.hpp
 	static constexpr int CameraCache = 0x500;
+	// :FCameraCacheEntry:POV:SoT_Engine_structs.hpp
 	static constexpr int CameraCachePOV = CameraCache + 0x10;
 	static constexpr int CameraLocation = CameraCachePOV + 0x0;
 	static constexpr int CameraRotation = CameraCachePOV + 0xC;
 	static constexpr int CameraFOV = CameraCachePOV + 0x18;
 	
-	// UIslandDataAsset
+	// :UIslandDataAsset:IslandDataEntries:SoT_Athena_classes.hpp
 	static constexpr int IslandDataEntries = 0x40;
 	static constexpr int IslandDataEntriesCount  = IslandDataEntries + 0x8;
 
-	// UIslandDataAssetEntry
+	// :UIslandDataAssetEntry:IslandName:SoT_Athena_classes.hpp
 	static constexpr int IslandName = 0x28;
+	// :UIslandDataAssetEntry:TreasureMaps:SoT_Athena_classes.hpp
 	static constexpr int TreasureMaps = 0x30;
 
-	// AXMarksTheSpotMap
+	// :AXMarksTheSpotMap:MapTexturePath:SoT_Athena_classes.hpp
 	static constexpr int MapTexturePath = 0x888;
+	// :AXMarksTheSpotMap:Marks:SoT_Athena_classes.hpp
 	static constexpr int Marks = 0x8C8;
 	static constexpr int MarksCount = Marks + 0x8;
 
@@ -70,12 +73,12 @@ public:
 	static constexpr int CurrentHealth = 0xDC;
 	static constexpr int MaxHealth = 0xD0;
 
-	// USceneComponent
+	// :USceneComponent:RelativeLocation:SoT_Engine_classes.hpp
 	static constexpr int RelativeLocation = 0x1B0;
 	static constexpr int RelativeRotation = RelativeLocation + 0xC;
 	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
-	// AIslandService
+	// :AIslandService:Marks:SoT_Athena_classes.hpp
 	static constexpr int IslandDataAsset = 0x4E8;
 
 	// FTreasureMapData
