@@ -4,7 +4,7 @@ class Offsets
 {
 public:
 	// :APlayerController:PlayerCameraManager:SoT_Engine_classes.hpp
-	static constexpr int PlayerCameraManager = 0x0518;
+	static constexpr int PlayerCameraManager = 0x0510;
 			
 	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
 	static constexpr int WieldedItemComponent = 0x820;
@@ -18,7 +18,7 @@ public:
 	static constexpr int WieldableItemName = 0x580; // ItemName property
 		
 	// :APlayerCameraManager:CameraCache:SoT_Engine_classes.hpp
-	static constexpr int CameraCache = 0x0500;
+	static constexpr int CameraCache = 0x04F0;
 	// :FCameraCacheEntry:POV:SoT_Engine_structs.hpp
 	static constexpr int CameraCachePOV = CameraCache + 0x10;
 	static constexpr int CameraLocation = CameraCachePOV + 0x0;
