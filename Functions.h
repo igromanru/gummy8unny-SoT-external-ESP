@@ -110,6 +110,7 @@ enum type
 	chicken,
 	pig,
 	snake,
+	fort
 };
 
 struct AActors
