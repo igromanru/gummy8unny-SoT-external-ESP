@@ -61,11 +61,12 @@ public:
 	// UObject
 	static constexpr int Id = 0x18;
 
-	// UWorld
+	// :UWorld:PersistentLevel:SoT_Engine_classes.hpp
 	static constexpr int PersistentLevel = 0x30; // ULevel
 	static constexpr int ActorsTArray = 0xA0; // Uknown offsets
 	static constexpr int ActorsTArrayCount = ActorsTArray + 0x8;
-	static constexpr int OwningGameInstance = 0x1C0;
+	// :UWorld:OwningGameInstance:SoT_Engine_classes.hpp
+	static constexpr int OwningGameInstance = 0x01C0;
 
 	// UGameInstance
 	static constexpr int LocalPlayers = 0x38;
