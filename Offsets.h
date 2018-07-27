@@ -40,6 +40,23 @@ public:
 	static constexpr int Marks = 0x8C8;
 	static constexpr int MarksCount = Marks + 0x8;
 
+	// :UPlayer:PlayerController:SoT_Engine_structs.hpp
+	static constexpr int PlayerController = 0x30;
+
+	// :AActor:RootComponent:SoT_Engine_structs.hpp
+	static constexpr int RootComponent = 0x178;
+
+	// :APawn:PlayerState:SoT_Engine_structs.hpp
+	static constexpr int PlayerState = 0x4A8;
+
+	// :AController:Pawn:SoT_Engine_structs.hpp
+	static constexpr int Pawn = 0x490; // LocalPlayer
+
+	// :APlayerState:PlayerId:SoT_Engine_structs.hpp
+	static constexpr int PlayerId = 0x4B0;
+	// :APlayerState:PlayerName:SoT_Engine_structs.hpp
+	static constexpr int PlayerName = 0x490;
+
 #pragma region Almsonst never changing offsets
 	// UObject
 	static constexpr int Id = 0x18;
@@ -52,23 +69,7 @@ public:
 
 	// UGameInstance
 	static constexpr int LocalPlayers = 0x38;
-
-	// UPlayer
-	static constexpr int PlayerController = 0x30;
-
-	// AActor		
-	static constexpr int RootComponent = 0x178;
-
-	// APawn
-	static constexpr int PlayerState = 0x4A8;
-
-	// AController
-	static constexpr int Pawn = 0x490; // LocalPlayer
-
-	// APlayerState
-	static constexpr int PlayerId = 0x4B0;	
-	static constexpr int PlayerName = 0x490;
-
+	
 	// UHealthComponent
 	static constexpr int CurrentHealth = 0xDC;
 	static constexpr int MaxHealth = 0xD0;
