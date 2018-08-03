@@ -533,6 +533,19 @@ int Render()
 					info.yaw = ActorYaw;
 					ActorArray.push_back(info);
 				}
+				///
+				/// SHIPWRECKS
+				///
+				else if (name.find("BP_Shipwreck_01_a_NetProxy_C") != std::string::npos || name.find("BP_Shipwreck_") != std::string::npos)
+				{
+					info.id = ActorID;
+					info.name = "SHIPWRECK";
+					info.type = animalcrate;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+					
+					ActorArray.push_back(info);
+				}
 				else if (name.find("IslandService") != std::string::npos)
 				{
 					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
