@@ -168,7 +168,6 @@ int Render()
 				}
 				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_TreasureChest") != std::string::npos && name.find("Proxy") || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest") != std::string::npos && name.find("Proxy") || name.find("StrongholdKey") != std::string::npos)
 				{
-
 					info.type = chest;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 50);
@@ -220,7 +219,7 @@ int Render()
 						info.name = "Chest of Legends";
 						info.rareity = Fort;
 					}
-					if (name.find("StrongholdKey") != std::string::npos)
+					if (name.find("StrongholdKey") != std::string::npos || name.find("StrongholdKey") != std::string::npos && name.find("Proxy") != std::string::npos)
 					{
 						info.id = ActorID;
 						info.name = "Stronghold Key";
@@ -228,7 +227,7 @@ int Render()
 					}
 					ActorArray.push_back(info);
 				}
-				else if (name.find("BP_BountyRewardSkull_P") != std::string::npos)
+				else if (name.find("BP_BountyRewardSkull_P") != std::string::npos || name.find("BP_BountyRewardSkull") != std::string::npos && name.find("Proxy") != std::string::npos)
 				{
 
 					info.type = skull;
@@ -347,7 +346,7 @@ int Render()
 //
 // Treasure Artifacts (Shinys)
 //
-				else if (name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
+				else if (name.find("BP_TreasureArtifact") != std::string::npos || name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
 				{
 
 					info.type = artifact;
