@@ -109,7 +109,12 @@ int Render()
 				auto fName = mem.Read<ULONG_PTR>(fNamePtr + 8 * (ActorID % 0x4000));
 				auto rs = mem.Read<text>(fName + 16);
 				std::string name = rs.word;
-				
+
+				if (name.find("IslandService") != std::string::npos)
+				{
+					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
+				}
+
 				if (name.find("BP_") == std::string::npos)
 					continue;
 				
@@ -547,10 +552,6 @@ int Render()
 					
 					ActorArray.push_back(info);
 				}
-				else if (name.find("IslandService") != std::string::npos)
-				{
-					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
-				}
 				else if (name.find("BP_SunkenCurseArtefact_") != std::string::npos)
 				{
 					info.id = ActorID;
@@ -572,7 +573,6 @@ int Render()
 					ActorArray.push_back(info);
 
 				}
-
 				if (IslandDataAsset_PTR != NULL)
 				{
 					if (name == "BP_TreasureMap_C")
@@ -597,8 +597,7 @@ int Render()
 										if (cTreasureLocation.MapSpaceLocation.x == value.x
 											&& cTreasureLocation.MapSpaceLocation.y == value.y)
 										{
-											new_XMarksTheSpot.push_back(
-												cTreasureLocation.WorldSpaceLocation);
+											new_XMarksTheSpot.push_back(cTreasureLocation.WorldSpaceLocation);
 											break;
 										}
 									}
