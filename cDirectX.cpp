@@ -161,7 +161,7 @@ int Render()
 					ActorArray.push_back(info);
 
 				}
-				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("StrongholdKey") != std::string::npos)
+				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_TreasureChest") != std::string::npos && name.find("Proxy") || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest") != std::string::npos && name.find("Proxy") || name.find("StrongholdKey") != std::string::npos)
 				{
 
 					info.type = chest;
