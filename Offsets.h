@@ -81,7 +81,7 @@ public:
 	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
 	// :AIslandService:Marks:SoT_Athena_classes.hpp
-	static constexpr int IslandDataAsset = 0x08C0;
+	static constexpr int IslandDataAsset = 0x04E0;
 
 	// FTreasureMapData
 	static constexpr int TreasureLocations = 0x10;
