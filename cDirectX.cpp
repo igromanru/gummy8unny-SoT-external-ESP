@@ -104,6 +104,20 @@ int Render()
 				auto Actorrelativelocation = mem.Read<Vector3>(ActorRootComponet + Offsets::RelativeLocation);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
 				auto ActorYaw = mem.Read<float>(ActorRootComponet + Offsets::RelativeRotationYaw);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
 
+				auto chunk = ActorID / 0x4000;
+				auto fNamePtr = mem.Read<ULONG_PTR>(GNames + chunk * 8);
+				auto fName = mem.Read<ULONG_PTR>(fNamePtr + 8 * (ActorID % 0x4000));
+				auto rs = mem.Read<text>(fName + 16);
+				std::string name = rs.word;
+
+				if (name.find("IslandService") != std::string::npos)
+				{
+					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
+				}
+
+				if (name.find("BP_") == std::string::npos)
+					continue;
+				
 				auto ActorWieldedItemComponent = mem.Read<ULONG_PTR>(Actor + Offsets::WieldedItemComponent);
 				auto ActorCurrentWieldedItem = mem.Read<ULONG_PTR>(ActorWieldedItemComponent + Offsets::CurrentlyWieldedItem);
 				auto ActorpWieldedItem = mem.Read<ULONG_PTR>(ActorCurrentWieldedItem + Offsets::WieldableItemName);
@@ -111,18 +125,10 @@ int Render()
 
 				using convert_type = std::codecvt_utf8<wchar_t>;
 				std::wstring_convert<convert_type, wchar_t> converter;
-
 				//use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
 				std::string ActorItemWieleded_str = converter.to_bytes(ActorItemWieleded);
 
 
-
-				auto chunk = ActorID / 0x4000;
-				auto fNamePtr = mem.Read<ULONG_PTR>(GNames + chunk * 8);
-				auto fName = mem.Read<ULONG_PTR>(fNamePtr + 8 * (ActorID % 0x4000));
-				auto rs = mem.Read<text>(fName + 16);
-
-				std::string name = rs.word;
 
 				AActors info;
 
@@ -160,9 +166,8 @@ int Render()
 					ActorArray.push_back(info);
 
 				}
-				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("StrongholdKey") != std::string::npos)
+				else if (name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_TreasureChest") != std::string::npos && name.find("Proxy") || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest") != std::string::npos && name.find("Proxy") || name.find("StrongholdKey") != std::string::npos)
 				{
-
 					info.type = chest;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 50);
@@ -211,10 +216,10 @@ int Render()
 					if (name.find("PirateLegend") != std::string::npos)
 					{
 						info.id = ActorID;
-						info.name = "Pirate Legend Chest";
+						info.name = "Chest of Legends";
 						info.rareity = Fort;
 					}
-					if (name.find("StrongholdKey") != std::string::npos)
+					if (name.find("StrongholdKey") != std::string::npos || name.find("StrongholdKey") != std::string::npos && name.find("Proxy") != std::string::npos)
 					{
 						info.id = ActorID;
 						info.name = "Stronghold Key";
@@ -222,7 +227,7 @@ int Render()
 					}
 					ActorArray.push_back(info);
 				}
-				else if (name.find("BP_BountyRewardSkull_P") != std::string::npos)
+				else if (name.find("BP_BountyRewardSkull_P") != std::string::npos || name.find("BP_BountyRewardSkull") != std::string::npos && name.find("Proxy") != std::string::npos)
 				{
 
 					info.type = skull;
@@ -321,16 +326,97 @@ int Render()
 					//info.namesize = GetTextWidth(info.name.c_str(), pFontSmall);
 					ActorArray.push_back(info);
 				}
+//
+// Skeleton Fort - Skull Cloud
+//
+				else if (name.find("BP_SkellyFort") != std::string::npos)
+				{
+					info.type = fort;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("SkullCloud") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Skeleton Fort";
+						info.rareity = Legendary;
+					}
+
+					ActorArray.push_back(info);
+				}
+//
+// Treasure Artifacts (Shinys)
+//
+				else if (name.find("BP_TreasureArtifact") != std::string::npos || name.find("BP_Treasure_Artifact") != std::string::npos && name.find("Proxy") != std::string::npos || name.find("BP_TreasureArtifact_Wieldable") != std::string::npos)
+				{
+
+					info.type = artifact;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("box") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Box";
+						info.rareity = Common;
+					}
+					if (name.find("goblet") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Goblet";
+						info.rareity = Rare;
+					}
+					if (name.find("impressive") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Impressive";
+						info.rareity = Legendary;
+					}
+					if (name.find("vase") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Shiny Vase";
+						info.rareity = Mythical;
+					}
+					if (name.find("base") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "??Shiny Base??";
+						info.rareity = Rare;
+					}
+
+					ActorArray.push_back(info);
+				}
+				//
+				// SKELETONS
+				//(updated to check for metal/shadow/plant forms)
 				else if (name.find("Skeleton") != std::string::npos)
 				{
 					info.id = ActorID;
-					info.name = "Skeleton";
+					//Check if Metal/Shadow/Plant Skeletons
+					if (name.find("MetalForm") != std::string::npos)
+					{
+						info.name = "{M} Skeleton";
+						info.rareity = Legendary;
+					}
+					else if (name.find("ShadowForm") != std::string::npos)
+					{
+						info.name = "~S~ Skeleton";
+						info.rareity = Mythical;
+					}
+					else if (name.find("PlantForm") != std::string::npos)
+					{
+						info.name = "<P> Skeleton";
+						info.rareity = Rare;
+					}
+					else
+					{
+						info.name = "Skeleton";
+					}
 					info.type = skeleton;
 					info.Location = Actorrelativelocation;
 					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+
 					ActorArray.push_back(info);
 				}
-
 				else if (name.find("BP_Chicken_") != std::string::npos)
 				{
 
@@ -364,8 +450,75 @@ int Render()
 
 					ActorArray.push_back(info);
 				}
+				// Pigs
+				else if (name.find("BP_Pig_") != std::string::npos)
+				{
 
-				else if (name.find("BP_SmallShipNetProxy") != std::string::npos || name.find("BP_LargeShipNetProxy") != std::string::npos)
+					info.type = pig;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Pink Pig";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Pig";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Pig";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Pig";
+						info.rareity = Mythical;
+					}
+
+					ActorArray.push_back(info);
+				}
+				// Snakes
+				else if (name.find("BP_Snake_") != std::string::npos)
+				{
+
+					info.type = snake;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 10);
+					if (name.find("Common") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Common Snake";
+						info.rareity = Common;
+					}
+					if (name.find("Rare") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Rare Snake";
+						info.rareity = Rare;
+					}
+					if (name.find("Legendary") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Black Snake";
+						info.rareity = Legendary;
+					}
+					if (name.find("Mythical") != std::string::npos)
+					{
+						info.id = ActorID;
+						info.name = "Golden Snake";
+						info.rareity = Mythical;
+					}
+
+					ActorArray.push_back(info);
+				}
+				else if (name.find("BP_SmallShipNetProxy") != std::string::npos || name.find("BP_MediumShipNetProxy") != std::string::npos || name.find("BP_LargeShipNetProxy") != std::string::npos)
 				{
 					info.id = ActorID;
 					info.name = "Ship";
@@ -375,7 +528,7 @@ int Render()
 					info.yaw = ActorYaw;
 					ActorArray.push_back(info);
 				}
-				else if (name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos)
+				else if (name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_MediumShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos)
 				{
 					info.id = ActorID;
 					info.name = "Ship";
@@ -385,11 +538,40 @@ int Render()
 					info.yaw = ActorYaw;
 					ActorArray.push_back(info);
 				}
-				else if (name.find("IslandService") != std::string::npos)
+				///
+				/// SHIPWRECKS
+				///
+				else if (name.find("BP_Shipwreck_01_a_NetProxy_C") != std::string::npos || name.find("BP_Shipwreck_") != std::string::npos)
 				{
-					IslandDataAsset_PTR = mem.Read<ULONG_PTR>(Actor + Offsets::IslandDataAsset);
+					info.id = ActorID;
+					info.name = "SHIPWRECK";
+					info.type = animalcrate;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+					
+					ActorArray.push_back(info);
 				}
+				else if (name.find("BP_SunkenCurseArtefact_") != std::string::npos)
+				{
+					info.id = ActorID;
+					if (name.find("Ruby") != std::string::npos)
+					{
+						info.name = "Ruby UnderWater Statue";
+					}
+					else if (name.find("Emerald") != std::string::npos)
+					{
+						info.name = "Emerald UnderWater Statue";
+					}
+					else if (name.find("Sapphire") != std::string::npos)
+					{
+						info.name = "Sapphire UnderWater Statue";
+					}
+					info.type = animalcrate;
+					info.Location = Actorrelativelocation;
+					info.TopLocation = Vector3(Actorrelativelocation.x, Actorrelativelocation.y, Actorrelativelocation.z + 75);
+					ActorArray.push_back(info);
 
+				}
 				if (IslandDataAsset_PTR != NULL)
 				{
 					if (name == "BP_TreasureMap_C")
@@ -414,8 +596,7 @@ int Render()
 										if (cTreasureLocation.MapSpaceLocation.x == value.x
 											&& cTreasureLocation.MapSpaceLocation.y == value.y)
 										{
-											new_XMarksTheSpot.push_back(
-												cTreasureLocation.WorldSpaceLocation);
+											new_XMarksTheSpot.push_back(cTreasureLocation.WorldSpaceLocation);
 											break;
 										}
 									}
