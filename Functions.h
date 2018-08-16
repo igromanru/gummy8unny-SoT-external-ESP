@@ -110,7 +110,9 @@ enum type
 	chicken,
 	pig,
 	snake,
-	fort
+	fort,
+	ghostship,
+	ghostcaptain
 };
 
 struct AActors
