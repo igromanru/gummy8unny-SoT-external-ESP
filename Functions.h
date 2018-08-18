@@ -183,10 +183,10 @@ vMatrix Matrix(Vector3 rot, Vector3 origin)
 	matrix[2][2] = CR * CP;
 	matrix[2][3] = 0.f;
 
-	matrix[3][0] = origin.x;
-	matrix[3][1] = origin.y;
-	matrix[3][2] = origin.z;
-	matrix[3][3] = 1.f;
+	//matrix[3][0] = origin.x;
+	//matrix[3][1] = origin.y;
+	//matrix[3][2] = origin.z;
+	//matrix[3][3] = 1.f;
 
 	return matrix;
 }
