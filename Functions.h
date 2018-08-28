@@ -311,19 +311,23 @@ std::string getNameFromID(int ID) {
 		DWORD_PTR fName = mem.Read<DWORD_PTR>(fNamePtr + 0x8 * int(ID % 0x4000));
 		return mem.Read<text>(fName + 0x10).word;
 	}
-	catch (int e) { return std::string(""); }
+	catch (int e)
+	{
+		return std::string("");
+	}
 }
+
 std::string GetActorName(int ID)
 {
 	try {
 		DWORD_PTR fNamePtr = mem.Read<DWORD_PTR>(GNames + int(ID / 0x4000) * 0x8);
-		DWORD_PTR fName = mem.Read<DWORD_PTR>(fNamePtr + 0x8 * int(ID % 0x4000));
-		//auto rs = mem.Read<text>(fName + 16);
-		//std::string name = rs.word;
-		
+		DWORD_PTR fName = mem.Read<DWORD_PTR>(fNamePtr + 0x8 * int(ID % 0x4000));		
 		return mem.Read<text>(fName + 16).word;
 	}
-	catch (int e) { return std::string(""); }
+	catch (int e)
+	{
+		return std::string("");
+	}
 }
 
 class AActor
@@ -372,21 +376,12 @@ bool find_Island_In_IslandDataEntries(std::string MapTexturePath, DWORD_PTR * Tr
 			}
 			catch (int e) { continue; }
 		}
-		return false;
-
 	}
-	else {
-		return false;
-	}
+	return false;
 }
 
 
-
-
-
 std::vector<Vector3> XMarksTheSpot;
-
-
 
 bool get_TreasureMap(DWORD_PTR _PTR, std::string * MapTexturePath, std::vector<Vector2> * Marks) {
 	try {

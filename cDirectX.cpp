@@ -10,8 +10,6 @@ D3DPRESENT_PARAMETERS p_Params;
 ID3DXLine* p_Line;
 ID3DXFont* pFontSmall = 0;
 
-int Width = 1224;
-int Height = 720;
 bool btAnimals, btChests, btArtifacts, btSkulls, btShipwrecks, btSkeletons, btMerchants, btTreasureMaps = true;
 
 int DirectXInit(HWND hWnd)
