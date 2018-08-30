@@ -9,7 +9,10 @@ ProcMem::ProcMem() {
 }
 
 ProcMem::~ProcMem() {
-	CloseHandle(hProcess);
+	if(hProcess != nullptr && hProcess != INVALID_HANDLE_VALUE)
+	{
+		CloseHandle(hProcess);
+	}	
 }
 
 
