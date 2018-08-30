@@ -4,21 +4,21 @@ class Offsets
 {
 public:
 	// :APlayerController:PlayerCameraManager:SoT_Engine_classes.hpp
-	static constexpr int PlayerCameraManager = 0x0510;
+	static constexpr int PlayerCameraManager = 0x0520;
 			
 	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
-	static constexpr int WieldedItemComponent = 0x0820;
+	static constexpr int WieldedItemComponent = 0x0830;
 	// :AAthenaCharacter:HealthComponent:SoT_Athena_classes.hpp
-	static constexpr int HealthComponent = 0x0848;
+	static constexpr int HealthComponent = 0x0858;
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
 	static constexpr int CurrentlyWieldedItem = 0x02A8;
 
 	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
-	static constexpr int WieldableItemName = 0x0578; // ItemName property
+	static constexpr int WieldableItemName = 0x0588; // ItemName property
 		
 	// :APlayerCameraManager:CameraCache:SoT_Engine_classes.hpp
-	static constexpr int CameraCache = 0x04F0;
+	static constexpr int CameraCache = 0x0500;
 	// :FCameraCacheEntry:POV:SoT_Engine_structs.hpp
 	static constexpr int CameraCachePOV = CameraCache + 0x0010;
 	static constexpr int CameraLocation = CameraCachePOV + 0x0;
@@ -35,9 +35,9 @@ public:
 	static constexpr int TreasureMaps = 0x0030;
 
 	// :AXMarksTheSpotMap:MapTexturePath:SoT_Athena_classes.hpp
-	static constexpr int MapTexturePath = 0x0880;
+	static constexpr int MapTexturePath = 0x0890;
 	// :AXMarksTheSpotMap:Marks:SoT_Athena_classes.hpp
-	static constexpr int Marks = 0x08C0;
+	static constexpr int Marks = 0x08D0;
 	static constexpr int MarksCount = Marks + 0x8;
 
 	// :UPlayer:PlayerController:SoT_Engine_classes.hpp
@@ -47,15 +47,15 @@ public:
 	static constexpr int RootComponent = 0x0170;
 
 	// :APawn:PlayerState:SoT_Engine_classes.hpp
-	static constexpr int PlayerState = 0x04A0;
+	static constexpr int PlayerState = 0x04B0;
 
 	// :AController:Pawn:SoT_Engine_classes.hpp
-	static constexpr int Pawn = 0x0488; // LocalPlayer
+	static constexpr int Pawn = 0x0498; // LocalPlayer
 
 	// :APlayerState:PlayerId:SoT_Engine_classes.hpp
-	static constexpr int PlayerId = 0x04A8;
+	static constexpr int PlayerId = 0x04B8;
 	// :APlayerState:PlayerName:SoT_Engine_classes.hpp
-	static constexpr int PlayerName = 0x0488;
+	static constexpr int PlayerName = 0x0498;
 
 #pragma region Almsonst never changing offsets
 	// UObject
@@ -81,7 +81,7 @@ public:
 	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
 	// :AIslandService:IslandDataAsset:SoT_Athena_classes.hpp
-	static constexpr int IslandDataAsset = 0x04E0;
+	static constexpr int IslandDataAsset = 0x04F0;
 
 	// FTreasureMapData
 	static constexpr int TreasureLocations = 0x10;
