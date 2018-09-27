@@ -12,7 +12,7 @@ public:
 	static constexpr int HealthComponent = 0x0858;
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
-	static constexpr int CurrentlyWieldedItem = 0x02A8;
+	static constexpr int CurrentlyWieldedItem = 0x02B8;
 
 	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
 	static constexpr int WieldableItemName = 0x0588; // ItemName property
@@ -76,7 +76,7 @@ public:
 	static constexpr int MaxHealth = 0xD0;
 
 	// :USceneComponent:RelativeLocation:SoT_Engine_classes.hpp
-	static constexpr int RelativeLocation = 0x01B0;
+	static constexpr int RelativeLocation = 0x01C0;
 	static constexpr int RelativeRotation = RelativeLocation + 0xC;
 	static constexpr int RelativeRotationYaw = RelativeRotation + 0x4;
 
