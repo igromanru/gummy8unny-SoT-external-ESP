@@ -7,15 +7,15 @@ public:
 	static constexpr int PlayerCameraManager = 0x0520;
 			
 	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
-	static constexpr int WieldedItemComponent = 0x0830;
+	static constexpr int WieldedItemComponent = 0x0860;
 	// :AAthenaCharacter:HealthComponent:SoT_Athena_classes.hpp
-	static constexpr int HealthComponent = 0x0858;
+	static constexpr int HealthComponent = 0x0888;
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
 	static constexpr int CurrentlyWieldedItem = 0x02B8;
 
 	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
-	static constexpr int WieldableItemName = 0x0588; // ItemName property
+	static constexpr int WieldableItemName = 0x0590; // ItemName property
 		
 	// :APlayerCameraManager:CameraCache:SoT_Engine_classes.hpp
 	static constexpr int CameraCache = 0x0500;
@@ -35,9 +35,9 @@ public:
 	static constexpr int TreasureMaps = 0x0030;
 
 	// :AXMarksTheSpotMap:MapTexturePath:SoT_Athena_classes.hpp
-	static constexpr int MapTexturePath = 0x0890;
+	static constexpr int MapTexturePath = 0x0898;
 	// :AXMarksTheSpotMap:Marks:SoT_Athena_classes.hpp
-	static constexpr int Marks = 0x08D0;
+	static constexpr int Marks = 0x08D8;
 	static constexpr int MarksCount = Marks + 0x8;
 
 	// :UPlayer:PlayerController:SoT_Engine_classes.hpp
