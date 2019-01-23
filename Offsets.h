@@ -7,9 +7,9 @@ public:
 	static constexpr int PlayerCameraManager = 0x0520;
 			
 	// :AAthenaCharacter:WieldedItemComponent:SoT_Athena_classes.hpp
-	static constexpr int WieldedItemComponent = 0x0860;
+	static constexpr int WieldedItemComponent = 0x0870;
 	// :AAthenaCharacter:HealthComponent:SoT_Athena_classes.hpp
-	static constexpr int HealthComponent = 0x0888;
+	static constexpr int HealthComponent = 0x0898;
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
 	static constexpr int CurrentlyWieldedItem = 0x02B8;
