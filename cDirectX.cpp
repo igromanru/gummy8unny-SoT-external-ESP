@@ -650,8 +650,8 @@ int Render()
 
 			///[OVERLAY DRAWING»]
 			// Crosshairs/Recticle
-			FillRGB((Width / 2)+30, (Height / 2)+15, 1, 30, 255, 40, 40, 120); //FillRGB((Width / 2) + 15, Height / 2, 1, 30, 1, 225, 1, 120); //GREEN
-			FillRGB((Width / 2)+15, (Height / 2)+30, 30, 1, 255, 40, 40, 120); //FillRGB(Width / 2, (Height / 2) + 15, 30, 1, 1, 225, 1, 120); //GREEN
+			FillRGB(Width * 0.5f - 10, Height * 0.5f, 20, 1, 255, 40, 40, 120); //FillRGB((Width / 2) + 15, Height / 2, 1, 30, 1, 225, 1, 120); //GREEN
+			FillRGB(Width * 0.5f, Height * 0.5f - 10, 1, 20, 255, 40, 40, 120); //FillRGB(Width / 2, (Height / 2) + 15, 30, 1, 1, 225, 1, 120); //GREEN
 			///--OVERLAY DRAWING--///
 			// ESP Radar
 			FillRGB(180, 30, 1, 300, 75, 68, 67, 90);
