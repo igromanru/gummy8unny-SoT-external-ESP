@@ -61,8 +61,8 @@ void ReadData()
 			WorldAddress = IgroWidgets::ReadRIPAddress(mem.hProcess, address, 3, 7);			
 		}
 		address = IgroWidgets::FindPatternExternal(mem.hProcess, reinterpret_cast<HMODULE>(BASE), 
-			reinterpret_cast<const unsigned char*>("\x48\x8B\x3D\x00\x00\x00\x00\x48\x85\xFF\x75\x00\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xF8\x48\x89\x44"),
-			"xxx????xxxx?x????x????xxxxxx");
+			reinterpret_cast<const unsigned char*>("\x48\x8B\x1D\x00\x00\x00\x00\x48\x85\x00\x75\x3A"),
+			"xxx????xx?xx");
 		if (address > 0)
 		{
 			NamesAddress = IgroWidgets::ReadRIPAddress(mem.hProcess, address, 3, 7);
@@ -75,7 +75,7 @@ void ReadData()
 class text
 {
 public:
-	char word[64];
+	char word[1024];
 };
 
 class textx
@@ -190,7 +190,7 @@ vMatrix Matrix(Vector3 rot, Vector3 origin)
 
 	return matrix;
 }
-bool WorldToScreen(Vector3 origin, Vector2 * out) {
+bool WorldToScreen(Vector3 origin, Vector2* out) {
 	Vector3 Screenlocation = Vector3(0, 0, 0);
 	Vector3 Rotation = myAngles;	// FRotator
 
@@ -310,19 +310,6 @@ std::string getNameFromID(int ID) {
 		DWORD_PTR fNamePtr = mem.Read<DWORD_PTR>(GNames + int(ID / 0x4000) * 0x8);
 		DWORD_PTR fName = mem.Read<DWORD_PTR>(fNamePtr + 0x8 * int(ID % 0x4000));
 		return mem.Read<text>(fName + 0x10).word;
-	}
-	catch (int e)
-	{
-		return std::string("");
-	}
-}
-
-std::string GetActorName(int ID)
-{
-	try {
-		DWORD_PTR fNamePtr = mem.Read<DWORD_PTR>(GNames + int(ID / 0x4000) * 0x8);
-		DWORD_PTR fName = mem.Read<DWORD_PTR>(fNamePtr + 0x8 * int(ID % 0x4000));		
-		return mem.Read<text>(fName + 16).word;
 	}
 	catch (int e)
 	{

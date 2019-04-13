@@ -1,12 +1,10 @@
 #include "hMain.h"
 
+int Width;
+int Height;
+MARGINS Margin;
 
-int Width = 1920;
-int Height = 1080;
-
-const MARGINS Margin = { 0, 0, Width, Height };
-
-char lWindowName[256] = "thiccc";
+char lWindowName[256] = "Overlay";
 HWND hWnd;
 
 char tWindowName[256] = "Sea of Thieves"; /* tWindowName ? Target Window Name */
@@ -95,6 +93,7 @@ void SetWindowToTarget()
 			GetWindowRect(tWnd, &tSize);
 			Width = tSize.right - tSize.left;
 			Height = tSize.bottom - tSize.top;
+			Margin = { 0, 0, Width, Height};
 			DWORD dwStyle = GetWindowLong(tWnd, GWL_STYLE);
 			if(dwStyle & WS_BORDER)
 			{

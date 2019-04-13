@@ -93,17 +93,8 @@ int Render()
 				ULONG_PTR Actor = mem.Read<ULONG_PTR>(ActorList + (i * 0x8));
 				if (!Actor)
 					continue;
-				int ActorID = mem.Read<int>(Actor + Offsets::Id);
-				auto ActorRootComponet = mem.Read<ULONG_PTR>(Actor + Offsets::RootComponent);
-				auto Actorrelativelocation = mem.Read<Vector3>(ActorRootComponet + Offsets::RelativeLocation);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
-				auto ActorYaw = mem.Read<float>(ActorRootComponet + Offsets::RelativeRotationYaw);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
-
-				/*auto chunk = ActorID / 0x4000;
-				auto fNamePtr = mem.Read<ULONG_PTR>(GNames + chunk * 8);
-				auto fName = mem.Read<ULONG_PTR>(fNamePtr + 8 * (ActorID % 0x4000));
-				auto rs = mem.Read<text>(fName + 16);
-				std::string name = rs.word;*/
-				std::string name = GetActorName(ActorID);
+				int ActorID = mem.Read<int>(Actor + Offsets::Id);				
+				std::string name = getNameFromID(ActorID);
 
 				if (name.find("IslandService") != std::string::npos)
 				{
@@ -111,7 +102,12 @@ int Render()
 				}
 				if (name.find("BP_") == std::string::npos)
 					continue;
+
+				auto ActorRootComponet = mem.Read<ULONG_PTR>(Actor + Offsets::RootComponent);
+				auto Actorrelativelocation = mem.Read<Vector3>(ActorRootComponet + Offsets::RelativeLocation);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
+				auto ActorYaw = mem.Read<float>(ActorRootComponet + Offsets::RelativeRotationYaw);//owninggameinstance.LocalPlayersPTR->LocalPlayers->PlayerController->PlayerState->RootComponent->RelativeLocation_0;
 				
+				/* WieldableItemName is missing in the latest SDK
 				auto ActorWieldedItemComponent = mem.Read<ULONG_PTR>(Actor + Offsets::WieldedItemComponent);
 				auto ActorCurrentWieldedItem = mem.Read<ULONG_PTR>(ActorWieldedItemComponent + Offsets::CurrentlyWieldedItem);
 				auto ActorpWieldedItem = mem.Read<ULONG_PTR>(ActorCurrentWieldedItem + Offsets::WieldableItemName);
@@ -124,7 +120,9 @@ int Render()
 				AActors info;
 
 				info.namesize = GetTextWidth(name.c_str(), pFontSmall);
-				info.item = ActorItemWieleded_str;
+				info.item = ActorItemWieleded_str; */
+				AActors info;
+				info.namesize = GetTextWidth(name.c_str(), pFontSmall);
 				//if (name.find("BP_PlayerPirate_C") != std::string::npos || name.find("BP_TreasureChest_P") != std::string::npos || name.find("BP_BountyRewardSkull_P") != std::string::npos || name.find("BP_ShipwreckTreasureChest_P") != std::string::npos || (name.find("BP_MerchantCrate") != std::string::npos && name.find("Proxy") != std::string::npos) || name.find("BP_SmallShipTemplate_C") != std::string::npos || name.find("BP_LargeShipTemplate_C") != std::string::npos || name.find("Skeleton") != std::string::npos)
 				if (name.find("BP_PlayerPirate_C") != std::string::npos)
 				{
