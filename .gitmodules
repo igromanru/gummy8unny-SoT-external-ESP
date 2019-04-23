@@ -1,6 +1,3 @@
 [submodule "FindPattern"]
 	path = FindPattern
 	url = git@github.com:igromanru/Cpp-FindPattern.git
-[submodule "Offsets-Updater"]
-	path = Offsets-Updater
-	url = git@github.com:igromanru/UE-SDK-Offsets-Updater.git
