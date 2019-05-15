@@ -13,9 +13,6 @@ public:
 		
 	// :UWieldedItemComponent:CurrentlyWieldedItem:SoT_Athena_classes.hpp
 	static constexpr int CurrentlyWieldedItem = 0x02C0;
-
-	// :AWieldableItem:ItemName:SoT_Athena_classes.hpp
-	//static constexpr int WieldableItemName = 0xerror; // ItemName property // missing in the latest SDK
 		
 	// :APlayerCameraManager:CameraCache:SoT_Engine_classes.hpp
 	static constexpr int CameraCache = 0x0520;
