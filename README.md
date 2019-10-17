@@ -1,0 +1,1 @@
+# Here is the ESP v2: https://github.com/gummy8unny/Sea-Of-Thieves-External-ESP-v2
